@@ -8,7 +8,6 @@ import helmet from "helmet";
 
 import userRouter from "./router/user";
 import homeRouter from "./router/home";
-console.log("eeefwkfnskn");
 import "./db";
 const app = express();
 
@@ -38,5 +37,5 @@ app.use(error);
 
 // Listening on port and message on start
 export const serverInstance = app.listen(port, () => {
-  console.log(`App listening on port ${port}`);
+  console.log(`🚀 App listening on port ${port}`);
 });

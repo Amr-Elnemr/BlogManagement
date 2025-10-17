@@ -8,7 +8,7 @@ export default (
   next: NextFunction
 ) => {
   err.statusCode = err.statusCode || 500;
-  const resObj: { message: string; error?: [string] } = {
+  const resObj: { message: string; error?: string[] } = {
     message: err.message ? err.message : "something went wrong!",
   };
   if (err.errors) {

@@ -1,6 +1,28 @@
 
 Todo:
-  ☐ Item
+  ✔ Boilerplate @done(25-10-16 15:54)
+  ☐ Readme
+  Model:
+    ✔ User Model @done(25-10-17 14:03)
+    ☐ Blog Model
+  Routes:
+    ✔ POST /signup @done(25-10-17 16:50)
+    ✔ POST /login @done(25-10-17 17:32)
+    ☐ Blog - Create
+    ☐ Blog - view
+    ☐ Blog - Delete
+    ☐ Blog - Update
+  Unit Testing:
+    ☐ Signup
+    ☐ Login
 
-Bonus:
-  ☐ 
+
+Optional:
+  ☐ Pagination for blog listing
+  ☐ Search functionality by title or content
+  ☐ Integration tests for blog management endpoints
+  ☐ Using swagger to document all Apis.
+
+Enhancements:
+  ☐ Using Typescript
+  ☐ Deployment
