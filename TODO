@@ -4,12 +4,12 @@ Todo:
   ☐ Readme
   Model:
     ✔ User Model @done(25-10-17 14:03)
-    ☐ Blog Model
+    ✔ Blog Model @done(25-10-17 23:00)
   Routes:
     ✔ POST /signup @done(25-10-17 16:50)
     ✔ POST /login @done(25-10-17 17:32)
-    ☐ Blog - Create
-    ☐ Blog - view
+    ✔ Blog - Create @done(25-10-17 23:39)
+    ✔ Blog - view @done(25-10-17 23:39)
     ☐ Blog - Delete
     ☐ Blog - Update
   Unit Testing:
@@ -18,11 +18,12 @@ Todo:
 
 
 Optional:
-  ☐ Pagination for blog listing
-  ☐ Search functionality by title or content
+  ✔ Pagination for blog listing @done(25-10-18 01:15)
+  ✔ Search functionality by title or content @done(25-10-18 01:46)
   ☐ Integration tests for blog management endpoints
   ☐ Using swagger to document all Apis.
 
 Enhancements:
-  ☐ Using Typescript
+  ✔ Using Typescript @done(25-10-18 01:47)
   ☐ Deployment
+  ☐ More test coverage
