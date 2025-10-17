@@ -1,4 +1,4 @@
-import { Model, Schema, model } from "mongoose";
+import { Model, Schema, model, Document } from "mongoose";
 import bcrypt from "bcrypt";
 import jwt, {
   type Secret,
@@ -7,7 +7,6 @@ import jwt, {
 } from "jsonwebtoken";
 import { jwtSecret, saltRounds } from "../config";
 import Joi from "joi";
-import { skip } from "node:test";
 
 export interface IUser {
   email: string;
@@ -22,7 +21,7 @@ interface IUserMethods {
 export type IUserDocument = IUser & IUserMethods & Document;
 
 interface IUserStaticMethods extends Model<IUserDocument> {
-  getUserFromToken(token: string): Promise<IUser>;
+  getUserFromToken(token: string): Promise<IUserDocument>;
 }
 
 export const UserSchema = new Schema<

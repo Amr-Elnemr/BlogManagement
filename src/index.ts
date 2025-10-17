@@ -7,7 +7,7 @@ import express, {
 import helmet from "helmet";
 
 import userRouter from "./router/user";
-import homeRouter from "./router/home";
+import blogRouter from "./router/blog";
 import "./db";
 const app = express();
 
@@ -30,7 +30,7 @@ app.use(["/"], (req: Request, res: Response, next: NextFunction) => {
 
 //use routers
 app.use(["/user", "/users"], userRouter);
-app.use("", homeRouter);
+app.use(["/blog", "/blogs"], blogRouter);
 
 //Error handler middleware
 app.use(error);

@@ -7,10 +7,6 @@ import CustomError from "helpers/CustomError";
 import User, { validateUser } from "model/user";
 const router = express.Router();
 
-router.get("/", (req: Request, res: Response, next: NextFunction) => {
-  res.status(200).send("This is the user router");
-});
-
 //Sign-up
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
   const { email, password, name } = req.body;
@@ -56,7 +52,7 @@ router.post(
     const isMatch = await targetUser?.checkPassword(req.body.password);
     if (isMatch) {
       const token = await targetUser?.generateToken();
-      return res.header("x-auth-token", token).json({
+      return res.json({
         targetUser,
         token,
         message: "Hello Again",
