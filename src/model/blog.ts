@@ -48,12 +48,19 @@ export const BlogSchema = new Schema<
     },
   }
 );
-export async function validateBlog(blog: IBlog) {
+export async function validateBlog(blog: IBlog, skipRequired = false) {
   let schema = Joi.object({
     title: Joi.string().min(20).max(255).required(),
-    content: Joi.string().min(20).max(255).required(),
+    content: Joi.string().min(20).max(500).required(),
     category: Joi.string().min(3).max(20).optional(),
   });
+
+  if (skipRequired) {
+    schema = schema.keys({
+      title: Joi.optional(),
+      content: Joi.optional(),
+    });
+  }
 
   try {
     const result = await schema.validateAsync(blog);

@@ -1,15 +1,12 @@
-import express, {
-  type Request,
-  type Response,
-  type NextFunction,
-} from "express";
+import express from "express";
 import CustomError from "helpers/CustomError";
 import Blog from "model/blog";
 const router = express.Router();
 import authentication from "middlewares/authentication";
 import { validateBlog } from "model/blog";
+import mongoose from "mongoose";
 
-//Get blogs (+ Paginated)
+/*===================== Get blogs (+ Paginated) =======================*/
 router.get(["/:category", "/"], async (req, res, next) => {
   //Handle path param (category)
   const categoryQuery = req.params.category
@@ -36,7 +33,7 @@ router.get(["/:category", "/"], async (req, res, next) => {
   return res.send(blogs);
 });
 
-//Create blog
+/*====================== Create blog ============================*/
 router.post("/", authentication, async (req, res, next) => {
   const { title, content, category } = req.body;
   const result = await validateBlog({ title, content, category });
@@ -49,9 +46,9 @@ router.post("/", authentication, async (req, res, next) => {
     return res.status(400).send("Blog with same title already exists!");
   }
   const newBlog = new Blog({
-    title: req.body.title,
-    content: req.body.content,
-    category: req.body.category,
+    title,
+    content,
+    category,
     owner: req.user?._id,
   });
 
@@ -65,6 +62,56 @@ router.post("/", authentication, async (req, res, next) => {
       res.status(422);
       return next(err);
     });
+});
+
+/*====================== Update ============================*/
+router.put("/:id", authentication, async (req, res, next) => {
+  //Check _id validity
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    return res.status(422).send("Invalid ID!");
+  }
+
+  //query
+  const targetBlog = await Blog.findOne({
+    _id: req.params.id,
+  });
+
+  //Check existance
+  if (!targetBlog) {
+    return res
+      .status(404)
+      .send(`Error: Blog with id: ${req.params.id} to change not found!`);
+  }
+
+  //Check authorization
+  if (!(req.user?._id as mongoose.Types.ObjectId).equals(targetBlog.owner)) {
+    return res.status(401).send("You are not authorized for this action!");
+  }
+
+  //Check Inputs
+  const { title, content, category } = req.body;
+  const result = await validateBlog({ title, content, category }, true);
+  if (result.errors) {
+    throw new CustomError("Invalid input!", 422, result.errors.details);
+  }
+
+  //validate title uniqueness
+  const existingBlog = await Blog.findOne({
+    title: req.body.title,
+  });
+  if (existingBlog) {
+    return res.status(400).send("Blog with same title already exists!");
+  }
+
+  //Update only provided values
+  Object.keys(result).forEach((key) => {
+    if (result[key]) {
+      targetBlog.set(key, result[key]);
+    }
+  });
+
+  const updatedBlog = await targetBlog.save();
+  res.status(200).send(updatedBlog);
 });
 
 export default router;
