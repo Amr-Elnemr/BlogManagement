@@ -114,4 +114,31 @@ router.put("/:id", authentication, async (req, res, next) => {
   res.status(200).send(updatedBlog);
 });
 
+/*====================== Delete ============================*/
+router.delete("/:id", authentication, async (req, res, next) => {
+  //Check _id validity
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    return res.status(422).send("Invalid Blog ID!");
+  }
+  //query
+  const targetBlog = await Blog.findOne({
+    _id: req.params.id,
+  });
+
+  //Check existance
+  if (!targetBlog) {
+    return res
+      .status(404)
+      .send(`Error: Blog with id: ${req.params.id} not found!`);
+  }
+
+  //Check authorization
+  if (!(req.user?._id as mongoose.Types.ObjectId).equals(targetBlog.owner)) {
+    return res.status(401).send("You are not authorized for this action!");
+  }
+  const result = await Blog.deleteOne({ _id: req.params.id });
+
+  res.send({ ...result, targetBlog });
+});
+
 export default router;

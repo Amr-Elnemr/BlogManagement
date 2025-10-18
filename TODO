@@ -10,7 +10,7 @@ Todo:
     ✔ POST /login @done(25-10-17 17:32)
     ✔ Blog - Create @done(25-10-17 23:39)
     ✔ Blog - view @done(25-10-17 23:39)
-    ☐ Blog - Delete
+    ✔ Blog - Delete @done(25-10-18 04:23)
     ✔ Blog - Update @done(25-10-18 04:00)
   Unit Testing:
     ☐ Signup
