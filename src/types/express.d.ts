@@ -1,12 +1,12 @@
 // import { Document } from "mongoose";
 import { IUserDocument } from "../model/user";
-import { IBlog } from "model/blog";
+import { IBlogDocument } from "model/blog";
 
 declare global {
   namespace Express {
     interface Request {
       user?: IUserDocument;
-      blog?: IBlog;
+      blog?: IBlogDocument;
     }
   }
 }

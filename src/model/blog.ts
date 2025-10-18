@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { Model, Schema, model, Types } from "mongoose";
+import { Schema, model, Types, Document } from "mongoose";
 
 export interface IBlog {
   title: string;
@@ -7,22 +7,10 @@ export interface IBlog {
   category: string;
   owner?: Types.ObjectId;
 }
-interface IBlogMethods {
-  //   checkPassword(plainPassword: string): Promise<boolean>;
-  //   generateToken(): Promise<string | undefined>;
-}
 
-export type IBlogDocument = IBlog & IBlogMethods & Document;
+export type IBlogDocument = IBlog & Document;
 
-interface IBlogStaticMethods extends Model<IBlogDocument> {
-  //   getUserFromToken(token: string): Promise<IUser>;
-}
-
-export const BlogSchema = new Schema<
-  IBlogDocument,
-  IBlogStaticMethods,
-  IBlogMethods
->(
+export const BlogSchema = new Schema<IBlogDocument>(
   {
     title: {
       type: String,
@@ -70,25 +58,6 @@ export async function validateBlog(blog: IBlog, skipRequired = false) {
   }
 }
 
-// UserSchema.statics.getUserFromToken = async function getUserFromToken(token) {
-//   const User = this;
-//   const decoded = await verifyJWT(token, jwtSecret).catch((err) => {
-//     // throw new CustomError(err.message, 401);
-//     return null;
-//   });
-//   return User.findById(decoded?.id);
-// };
-
-// UserSchema.methods.checkPassword = async function (plainPassword: string) {
-//   const currentDocument = this;
-//   return bcrypt.compare(plainPassword, currentDocument.password);
-// };
-
-// UserSchema.methods.generateToken = async function () {
-//   const currentDocument = this;
-//   return signJWT({ id: currentDocument.id }, jwtSecret, { expiresIn: "1hr" });
-// };
-
-const Blog = model<IBlogDocument, IBlogStaticMethods>("Blog", BlogSchema);
+const Blog = model<IBlogDocument>("Blog", BlogSchema);
 
 export default Blog;
