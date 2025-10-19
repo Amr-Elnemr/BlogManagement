@@ -10,8 +10,8 @@ This is the backend service for a blog management system, built with **Express.j
 
 You'll need the following installed:
 
-- **Node.js** (LTS version recommended)
-- **MongoDB** running locally or a cloud-hosted MongoDB URI.
+- **Node.js** 
+- **MongoDB** 
 
 ### Installation
 
