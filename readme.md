@@ -18,7 +18,7 @@ You'll need the following installed:
 1.  **Clone the repository:**
 
     ```bash
-    git clone [Your Repository URL]
+    git clone https://github.com/Amr-Elnemr/BlogManagement.git
     cd BlogManagement
     ```
 
