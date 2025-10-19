@@ -3,21 +3,19 @@ import express, {
   type Response,
   type NextFunction,
 } from "express";
-import CustomError from "helpers/CustomError";
-import Blog from "model/blog";
+import CustomError from "../helpers/CustomError";
+import Blog, { validateBlog } from "../model/blog";
 const router = express.Router();
-import authentication from "middlewares/authentication";
-import { validateBlog } from "model/blog";
-import mongoose from "mongoose";
-import validateID from "middlewares/validateID";
-import checkBlogExistance from "middlewares/checkBlogExistance";
-import authorization from "middlewares/authorization";
+import authentication from "../middlewares/authentication";
+import validateID from "../middlewares/validateID";
+import checkBlogExistance from "../middlewares/checkBlogExistance";
+import authorization from "../middlewares/authorization";
 
 /*===================== Get blogs (+ Paginated) =======================*/
 router.get(["/:category", "/"], async (req, res, next) => {
   //Handle path param (category)
   const categoryQuery = req.params.category
-    ? { category: req.params.category }
+    ? { category: { $regex: new RegExp(`${req.params.category}`, "i") } }
     : {};
 
   //Handle pagination query params

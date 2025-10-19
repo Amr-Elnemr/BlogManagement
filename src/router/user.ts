@@ -3,8 +3,8 @@ import express, {
   type Response,
   type NextFunction,
 } from "express";
-import CustomError from "helpers/CustomError";
-import User, { validateUser } from "model/user";
+import CustomError from "../helpers/CustomError";
+import User, { validateUser } from "../model/user";
 const router = express.Router();
 
 //Sign-up

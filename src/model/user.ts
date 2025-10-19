@@ -7,6 +7,7 @@ import jwt, {
 } from "jsonwebtoken";
 import { jwtSecret, saltRounds } from "../config";
 import Joi from "joi";
+import CustomError from "../helpers/CustomError";
 
 export interface IUser {
   email: string;
@@ -80,7 +81,7 @@ export async function validateUser(user: IUser, skipName = false) {
 UserSchema.statics.getUserFromToken = async function getUserFromToken(token) {
   const User = this;
   const decoded = await verifyJWT(token, jwtSecret).catch((err) => {
-    return null;
+    throw new CustomError(err, 401);
   });
   return User.findById(decoded?.id);
 };

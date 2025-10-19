@@ -1,0 +1,233 @@
+{
+	"info": {
+		"_postman_id": "9455b09d-9b1b-4e06-94ae-d66a75885bb8",
+		"name": "BlogManagement",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45957367",
+		"_collection_link": "https://amressam-5781562.postman.co/workspace/Amr-Essam's-Workspace~eb92ec0e-5f23-4f70-86d0-b29e104eb53e/collection/45957367-9455b09d-9b1b-4e06-94ae-d66a75885bb8?action=share&source=collection_link&creator=45957367"
+	},
+	"item": [
+		{
+			"name": "SignUp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"simo3@simo.com\",\n    \"password\": \"simo1234\",\n    \"name\": \"simoooo\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/user",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"simo3@simo.com\",\n    \"name\": \"simoooo\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/user/login",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Blog-Get",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/blog",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"blog"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Blog-Get-category",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/blog",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"blog"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Blog-Get-Search",
+					"originalRequest": {
+						"method": "GET",
+						"header": []
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Blog-Get-Pagination",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/blog",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"blog"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Blog-Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"simo3@simo.com\",\n    \"name\": \"simoooo\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/blog",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"blog"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Blog-update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZjI0OTY4NTEyNDZkZDJiMDEwOGRjOCIsImlhdCI6MTc2MDc0NDM2MCwiZXhwIjoxNzYwNzQ3OTYwfQ.EBdwLwqC_9i6TPPVZlfekinhwqlv0PIBiey96sckyQ4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"The Future of Remote Work: A Deep Dive\",\n    \"content\": \"The shift to remote work has been accelerated by recent global events. We explore the tools, strategies, and cultural changes needed to make it a sustainable, long-term model for businesses of all sizes, focusing on asynchronous communication and digital well-being.\",\n    \"category\": \"Technology\"\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/blog/68f2984f54b13b0e3624bc96",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"blog",
+						"68f2984f54b13b0e3624bc96"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Blog- Delete",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZjI0OTY4NTEyNDZkZDJiMDEwOGRjOCIsImlhdCI6MTc2MDc0NDM2MCwiZXhwIjoxNzYwNzQ3OTYwfQ.EBdwLwqC_9i6TPPVZlfekinhwqlv0PIBiey96sckyQ4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"The Future of Remote Work: A Deep Dive\",\n    \"content\": \"The shift to remote work has been accelerated by recent global events. We explore the tools, strategies, and cultural changes needed to make it a sustainable, long-term model for businesses of all sizes, focusing on asynchronous communication and digital well-being.\",\n    \"category\": \"Technology\"\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/blog/68f2984f54b13b0e3624bc96",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"blog",
+						"68f2984f54b13b0e3624bc96"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

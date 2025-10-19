@@ -14,6 +14,6 @@ export default (
   if (err.errors) {
     resObj.error = err.errors;
   }
-  console.error(err.message, err);
+  // console.error(err.message, err);
   res.status(err.statusCode).send(resObj);
 };
