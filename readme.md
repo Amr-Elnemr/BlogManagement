@@ -106,11 +106,11 @@ The following are the main categories of endpoints available, corresponding to t
 
 > **📘 Postman Collection:** A comprehensive Postman collection with examples for all API endpoints is available in this repository. You can find it here:
 >
-> 🔗 [Link to Postman Collection file or directory](./BlogManagement.postman_collection.json)
+> 🔗 [Link to Postman Collection](./BlogManagement.postman_collection.json)
 
 ---
 
-## ✅ Testing
+## 🧪 Testing
 
 To run the unit and integration tests:
 
