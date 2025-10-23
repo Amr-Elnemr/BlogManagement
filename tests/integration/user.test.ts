@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 let server: Server;
 
 let tempUser = {};
+const baseURL = "/v1/api/users";
 describe("/api/sample", () => {
   beforeAll(async () => {
     const { serverInstance } = await import("../../src/index");
@@ -31,7 +32,7 @@ describe("/api/sample", () => {
   describe("Register || POST", () => {
     it("should return 422 if an invalid input is sent", async () => {
       const res = await request(server)
-        .post("/user")
+        .post(baseURL)
         .send({ ...tempUser, password: "user1" });
 
       const userToFind = await User.find({ username: "user1" });
@@ -44,13 +45,13 @@ describe("/api/sample", () => {
       const user = new User(tempUser);
       await user.save();
 
-      const res = await request(server).post("/user").send(tempUser);
+      const res = await request(server).post(baseURL).send(tempUser);
 
       expect(res.status).toBe(400);
     });
 
     it("should return 200 and register the user if valid input is sent", async () => {
-      const res = await request(server).post("/user").send(tempUser);
+      const res = await request(server).post(baseURL).send(tempUser);
 
       const userToCheck = await User.find({ username: "user1" });
 
@@ -67,7 +68,7 @@ describe("/api/sample", () => {
       await user.save();
 
       const res = await request(server)
-        .post("/user/login")
+        .post(`${baseURL}/login`)
         .send({ email: "user1@", password: "user1234" });
 
       expect(res.status).toBe(422);
@@ -75,7 +76,7 @@ describe("/api/sample", () => {
 
     it("should return 401 if the user not found", async () => {
       const res = await request(server)
-        .post("/user/login")
+        .post(`${baseURL}/login`)
         .send({ email: "user1@user1.com", password: "user1234" });
 
       expect(res.status).toBe(401);
@@ -86,7 +87,7 @@ describe("/api/sample", () => {
       await user.save();
 
       const res = await request(server)
-        .post("/user/login")
+        .post(`${baseURL}/login`)
         .send({ email: "user1@user1.com", password: "user1234" });
 
       expect(res.status).toBe(200);

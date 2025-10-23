@@ -10,15 +10,15 @@ This is the backend service for a blog management system, built with **Express.j
 
 You'll need the following installed:
 
-- **Node.js** 
-- **MongoDB** 
+- **Node.js** (LTS version recommended)
+- **MongoDB** running locally or a cloud-hosted MongoDB URI.
 
 ### Installation
 
 1.  **Clone the repository:**
 
     ```bash
-    git clone https://github.com/Amr-Elnemr/BlogManagement.git
+    git clone [Your Repository URL]
     cd BlogManagement
     ```
 
@@ -106,11 +106,11 @@ The following are the main categories of endpoints available, corresponding to t
 
 > **📘 Postman Collection:** A comprehensive Postman collection with examples for all API endpoints is available in this repository. You can find it here:
 >
-> 🔗 [Link to Postman Collection](./BlogManagement.postman_collection.json)
+> 🔗 [Link to Postman Collection file or directory](./BlogManagement.postman_collection.json)
 
 ---
 
-## 🧪 Testing
+## ✅ Testing
 
 To run the unit and integration tests:
 
@@ -128,8 +128,11 @@ npm test
 
 - `helpers/` - Utility functions and helper modules
 - `middlewares/` - Express middleware functions
+- `controllers/` - Handle requests and send responses. The interface.
+- `validators/` - Middlwares that heck and sanitize incoming request data. The gatekeeper
+- `services/` - Contain the business logic and database interaction. The core work
 - `model/` - Database models and schemas
-- `router/` - Route definitions and API endpoints
+- `routes/` - Route definitions and API endpoints
 - `types/` - TypeScript type definitions
   - `express.d.ts` - Express type extensions
 - `config.ts` - Configuration types

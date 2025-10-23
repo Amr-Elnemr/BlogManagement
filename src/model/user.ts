@@ -1,12 +1,7 @@
 import { Model, Schema, model, Document } from "mongoose";
 import bcrypt from "bcrypt";
-import jwt, {
-  type Secret,
-  type SignOptions,
-  type JwtPayload,
-} from "jsonwebtoken";
+import { verifyJWT, signJWT } from "../helpers/jwtHelpers";
 import { jwtSecret, saltRounds } from "../config";
-import Joi from "joi";
 import CustomError from "../helpers/CustomError";
 
 export interface IUser {
@@ -55,29 +50,6 @@ export const UserSchema = new Schema<
   }
 );
 
-export async function validateUser(user: IUser, skipName = false) {
-  let schema = Joi.object({
-    email: Joi.string().min(5).max(255).required().email(),
-    name: Joi.string().min(5).max(50).required(),
-    password: Joi.string()
-      .pattern(new RegExp(`^(?=.*[A-Za-z])(?=.*\\d).{8,}$`))
-      .required(),
-  });
-
-  // make name optional for login endpoint
-  if (skipName) {
-    schema = schema.keys({
-      name: Joi.optional(),
-    });
-  }
-  try {
-    const result = await schema.validateAsync(user);
-    return result;
-  } catch (error) {
-    return { errors: error };
-  }
-}
-
 UserSchema.statics.getUserFromToken = async function getUserFromToken(token) {
   const User = this;
   const decoded = await verifyJWT(token, jwtSecret).catch((err) => {
@@ -94,35 +66,6 @@ UserSchema.methods.checkPassword = async function (plainPassword: string) {
 UserSchema.methods.generateToken = async function () {
   const currentDocument = this;
   return signJWT({ id: currentDocument.id }, jwtSecret, { expiresIn: "1hr" });
-};
-
-const signJWT = (
-  payload: string | object | Buffer,
-  secretOrPrivateKey: Secret,
-  options: SignOptions
-): Promise<string | undefined> => {
-  return new Promise((resolve, reject) => {
-    jwt.sign(payload, secretOrPrivateKey, options, (err, token) => {
-      if (err) {
-        return reject(err);
-      }
-      resolve(token);
-    });
-  });
-};
-
-const verifyJWT = (
-  token: string,
-  secretOrPublicKey: Secret
-): Promise<JwtPayload> => {
-  return new Promise((resolve, reject) => {
-    jwt.verify(token, secretOrPublicKey, (err, decoded) => {
-      if (err) {
-        return reject(err);
-      }
-      resolve(decoded as JwtPayload);
-    });
-  });
 };
 
 //ensure hashed password before saving

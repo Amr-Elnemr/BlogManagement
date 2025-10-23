@@ -14,7 +14,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"simo3@simo.com\",\n    \"password\": \"simo1234\",\n    \"name\": \"simoooo\"\n}",
+					"raw": "{\n    \"email\": \"user34@user2.net\",\n    \"password\": \"user1234\",\n    \"name\": \"user1234\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -22,13 +22,12 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/user",
+					"raw": "{{baseURL}}/users",
 					"host": [
-						"localhost"
+						"{{baseURL}}"
 					],
-					"port": "3000",
 					"path": [
-						"user"
+						"users"
 					]
 				}
 			},
@@ -41,7 +40,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"email\": \"simo3@simo.com\",\n    \"name\": \"simoooo\"\n}",
+					"raw": "{\n    \"email\": \"user1@user1.com\",\n    \"password\": \"user1234\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -49,13 +48,12 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/user/login",
+					"raw": "{{baseURL}}/users/login",
 					"host": [
-						"localhost"
+						"{{baseURL}}"
 					],
-					"port": "3000",
 					"path": [
-						"user",
+						"users",
 						"login"
 					]
 				}
@@ -85,13 +83,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/blog",
+							"raw": "{{baseURL}}/blog/health",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
-								"blog"
+								"blog",
+								"health"
 							]
 						}
 					},
@@ -104,7 +102,22 @@
 					"name": "Blog-Get-Search",
 					"originalRequest": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/blog?search=pop",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"blog"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "pop"
+								}
+							]
+						}
 					},
 					"_postman_previewlanguage": null,
 					"header": null,
@@ -117,13 +130,22 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/blog",
+							"raw": "{{baseURL}}/blog?page=2&limit=2",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"blog"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								}
 							]
 						}
 					},
@@ -138,10 +160,16 @@
 			"name": "Blog-Create",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZjRhMDFmYTY2ZjI2ZTI4ZjRkZDNhNCIsImlhdCI6MTc2MTIwNTM0MSwiZXhwIjoxNzYxMjA4OTQxfQ.otgL6jIUJptQofKjOkM5yA-yLzD21XVX95x804AO9eo",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"email\": \"simo3@simo.com\",\n    \"name\": \"simoooo\"\n}",
+					"raw": "{\n    \"title\": \"Lorem ipsum dolor sit2\",\n    \"content\": \"Lorem ipsum dolor sit\",\n    \"category\": \"cat4\"\n  }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -149,13 +177,12 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/blog",
+					"raw": "{{baseURL}}/blogs",
 					"host": [
-						"localhost"
+						"{{baseURL}}"
 					],
-					"port": "3000",
 					"path": [
-						"blog"
+						"blogs"
 					]
 				}
 			},
@@ -198,17 +225,17 @@
 		{
 			"name": "Blog- Delete",
 			"request": {
-				"method": "PUT",
+				"method": "DELETE",
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZjI0OTY4NTEyNDZkZDJiMDEwOGRjOCIsImlhdCI6MTc2MDc0NDM2MCwiZXhwIjoxNzYwNzQ3OTYwfQ.EBdwLwqC_9i6TPPVZlfekinhwqlv0PIBiey96sckyQ4",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZjRhMDFmYTY2ZjI2ZTI4ZjRkZDNhNCIsImlhdCI6MTc2MDg2MjQyMywiZXhwIjoxNzYwODY2MDIzfQ.JFVLcRUrIY76QVcaIwcGXXkoy2P8id5oNfE7s8ObrhU",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"title\": \"The Future of Remote Work: A Deep Dive\",\n    \"content\": \"The shift to remote work has been accelerated by recent global events. We explore the tools, strategies, and cultural changes needed to make it a sustainable, long-term model for businesses of all sizes, focusing on asynchronous communication and digital well-being.\",\n    \"category\": \"Technology\"\n  }",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -216,18 +243,47 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/blog/68f2984f54b13b0e3624bc96",
+					"raw": "{{baseURL}}/blogs/68f4a551abe4f57c7300686e",
 					"host": [
-						"localhost"
+						"{{baseURL}}"
 					],
-					"port": "3000",
 					"path": [
-						"blog",
-						"68f2984f54b13b0e3624bc96"
+						"blogs",
+						"68f4a551abe4f57c7300686e"
 					]
 				}
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": ""
 		}
 	]
 }

@@ -1,4 +1,4 @@
-import type CustomError from "../helpers/CustomError.ts";
+import type CustomError from "../helpers/CustomError.js";
 import { type Request, type Response, type NextFunction } from "express";
 
 export default (
@@ -7,7 +7,6 @@ export default (
   res: Response,
   next: NextFunction
 ) => {
-  err.statusCode = err.statusCode || 500;
   const resObj: { message: string; error?: string[] } = {
     message: err.message ? err.message : "something went wrong!",
   };
@@ -15,5 +14,5 @@ export default (
     resObj.error = err.errors;
   }
   // console.error(err.message, err);
-  res.status(err.statusCode).send(resObj);
+  res.status(err.statusCode || 500).send(resObj);
 };
