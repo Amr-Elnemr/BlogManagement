@@ -1,11 +1,13 @@
 import { type Request, type Response } from "express";
 import defaultController from "./defaultController";
-import getBlog from "../services/blog/getBlog";
-import createBlog from "../services/blog/createBlog";
+import {
+  getBlog,
+  createBlog,
+  updateBlog,
+  deleteBlog,
+} from "../services/blogs.service";
 import { Types } from "mongoose";
-import updateBlog from "../services/blog/updateBlog";
-import { IBlogDocument } from "../model/blog";
-import deleteBlog from "../services/blog/deleteBlog";
+import { IBlogDocument } from "../model/blog.model";
 
 export const get = (req: Request, res: Response) => {
   const pageNumber = parseInt(req.query.page as string);

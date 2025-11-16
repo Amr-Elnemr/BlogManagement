@@ -1,5 +1,5 @@
 import CustomError from "../helpers/CustomError";
-import User from "../model/user";
+import User from "../model/user.model";
 import { type Request, type Response, type NextFunction } from "express";
 
 export default async (req: Request, res: Response, next: NextFunction) => {

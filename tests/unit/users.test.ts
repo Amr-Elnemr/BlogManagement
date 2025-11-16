@@ -1,4 +1,4 @@
-import User from "../../src/model/user";
+import User from "../../src/model/user.model";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import { jwtSecret, saltRounds } from "../../src/config";

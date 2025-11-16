@@ -1,6 +1,6 @@
 import request from "supertest";
 import { Server } from "http";
-import User from "../../src/model/user";
+import User from "../../src/model/user.model";
 import mongoose from "mongoose";
 let server: Server;
 

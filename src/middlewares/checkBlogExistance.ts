@@ -1,5 +1,5 @@
 import { type Request, type Response, type NextFunction } from "express";
-import Blog from "../model/blog";
+import Blog from "../model/blog.model";
 
 export default async (req: Request, res: Response, next: NextFunction) => {
   //query

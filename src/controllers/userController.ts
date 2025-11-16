@@ -1,7 +1,6 @@
 import { type Request, type Response } from "express";
 import defaultController from "./defaultController";
-import createUser from "../services/user/createUser";
-import loginUser from "../services/user/loginUser";
+import { createUser, loginUser } from "../services/users.service";
 
 export const create = (req: Request, res: Response) => {
   const promise = createUser(req.body);
