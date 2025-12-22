@@ -136,6 +136,7 @@ npm test
 - `types/` - TypeScript type definitions
   - `express.d.ts` - Express type extensions
 - `config.ts` - Configuration types
+- `docs` - Swagger documentation
 - `db.ts` - Database types
 - `index.ts` - Type exports
 

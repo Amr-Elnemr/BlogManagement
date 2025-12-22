@@ -5,7 +5,7 @@ import { type Request, type Response, type NextFunction } from "express";
 export default function validateBlog(skipRequired = false) {
   return async (req: Request, res: Response, next: NextFunction) => {
     if (!req.body) {
-      throw new CustomError("Missing or Invalid Data!", 401);
+      throw new CustomError("Missing or Invalid Data!", 422);
     }
     let schema = Joi.object({
       title: Joi.string().min(20).max(255).required(),

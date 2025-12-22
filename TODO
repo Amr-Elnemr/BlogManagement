@@ -21,7 +21,7 @@ Optional:
   ✔ Pagination for blog listing @done(25-10-18 01:15)
   ✔ Search functionality by title or content @done(25-10-18 01:46)
   ☐ Integration tests for blog management endpoints
-  ☐ Using swagger to document all Apis.
+  ✔ Using swagger to document all Apis. @done(25-12-22 13:23)
 
 Enhancements:
   ✔ Using Typescript @done(25-10-18 01:47)

@@ -4,7 +4,7 @@ import { createUser, loginUser } from "../services/users.service";
 
 export const create = (req: Request, res: Response) => {
   const promise = createUser(req.body);
-  return defaultController(res, promise);
+  return defaultController(res, promise, 201);
 };
 
 export const login = (req: Request, res: Response) => {

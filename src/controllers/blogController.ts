@@ -23,7 +23,7 @@ export const get = (req: Request, res: Response) => {
 
 export const create = (req: Request, res: Response) => {
   const promise = createBlog(req.body, req.user?._id as Types.ObjectId);
-  return defaultController(res, promise);
+  return defaultController(res, promise, 201);
 };
 
 export const update = (req: Request, res: Response) => {

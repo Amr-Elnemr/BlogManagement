@@ -50,12 +50,12 @@ describe("/api/sample", () => {
       expect(res.status).toBe(400);
     });
 
-    it("should return 200 and register the user if valid input is sent", async () => {
+    it("should return 201 and register the user if valid input is sent", async () => {
       const res = await request(server).post(baseURL).send(tempUser);
 
       const userToCheck = await User.find({ username: "user1" });
 
-      expect(res.status).toBe(200);
+      expect(res.status).toBe(201);
       expect(res.body).toHaveProperty("_id");
       expect(res.body).toHaveProperty("email", "user1@user1.com");
       expect(userToCheck).not.toBeNull();
