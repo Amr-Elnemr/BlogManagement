@@ -136,8 +136,8 @@
  *                 type: string
  *                 example: "category"
  *     responses:
- *       201:
- *         description: Blog created successfully
+ *       200:
+ *         description: Blog updated successfully
  *       400:
  *         description: Blog with the same title already exists
  *       401:
