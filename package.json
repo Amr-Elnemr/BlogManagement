@@ -8,8 +8,8 @@
     "build": "npx tsc",
     "start": "node dist/index.js",
     "dev": "tsx watch src/index.ts",
-    "test": "dotenvx run -f .env.testing -f .env -- jest --watchAll --verbose",
-    "test:coverage": "dotenvx run -f .env.testing -f .env -- jest --watchAll --verbose --coverage",
+    "test": "dotenvx run -f .env.testing -f .env -- jest --watchAll --verbose --runInBand",
+    "test:coverage": "dotenvx run -f .env.testing -f .env -- jest --watchAll --verbose --runInBand --coverage",
     "test:leaks": "jest --detectOpenHandles"
   },
   "dependencies": {

@@ -6,7 +6,7 @@ let server: Server;
 
 let tempUser = {};
 const baseURL = "/v1/api/users";
-describe("/api/sample", () => {
+describe("Users Testing", () => {
   beforeAll(async () => {
     const { serverInstance } = await import("../../src/index");
     server = serverInstance;
