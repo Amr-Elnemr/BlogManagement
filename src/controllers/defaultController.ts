@@ -1,8 +1,8 @@
 import { type Response } from "express";
 
-export default async (
+export default async <T>(
   res: Response,
-  promise: Promise<any>,
+  promise: Promise<T>,
   successCode = 200
 ) => {
   const data = await promise;

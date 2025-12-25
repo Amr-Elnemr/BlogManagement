@@ -30,3 +30,4 @@ Enhancements:
   ☐ Improve relative paths
   ☐ Separate logic inside models
   ☐ Review middlewares vs validators
+  ☐ revisit types (remove anys)

@@ -10,8 +10,8 @@ import { Types } from "mongoose";
 import { IBlogDocument } from "../model/blog.model";
 
 export const get = (req: Request, res: Response) => {
-  const pageNumber = parseInt(req.query.page as string);
-  const pageSize = parseInt(req.query.limit as string);
+  const pageNumber = parseInt(req.query.page as string) || undefined;
+  const pageSize = parseInt(req.query.limit as string) || undefined;
   const promise = getBlog(
     req.params.category,
     pageNumber,

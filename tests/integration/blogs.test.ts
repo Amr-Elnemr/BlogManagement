@@ -31,21 +31,24 @@ let authToken: string;
 let createdUser: IUserDocument;
 const baseURL = "/v1/api/blogs";
 
+async function createUser(user: IUser) {
+  const createdUser = await User.create(tempUser);
+  // Login to get token
+  const loginResponse = await request(server).post("/v1/api/users/login").send({
+    email: tempUser.email,
+    password: tempUser.password,
+  });
+
+  authToken = `Bearer ${loginResponse.body.token}`;
+  return { createdUser, authToken };
+}
+
 describe("Blogs Testing", () => {
   beforeAll(async () => {
     const { serverInstance } = await import("../../src/index");
     server = serverInstance;
 
-    createdUser = await User.create(tempUser);
-    // Login to get token
-    const loginResponse = await request(server)
-      .post("/v1/api/users/login")
-      .send({
-        email: tempUser.email,
-        password: tempUser.password,
-      });
-
-    authToken = `Bearer ${loginResponse.body.token}`;
+    ({ createdUser, authToken } = await createUser(tempUser));
   });
 
   afterAll(async () => {
@@ -110,13 +113,19 @@ describe("Blogs Testing", () => {
     afterAll(async () => {
       await Blog.deleteMany({});
     });
-    beforeAll(async () => {
-      await Blog.deleteMany({});
-    });
 
     describe("Creation", () => {
-      it("shoudl return 401 if auth token is not provided", async () => {
+      it("shoudl return 401 if attempt to create post unauthorized", async () => {
         const res = await request(server).post(baseURL).send(tempPosts[0]);
+        expect(res.status).toBe(401);
+      });
+
+      it("shoudl return 401 if attempt to create post with invalid token", async () => {
+        const res = await request(server)
+          .post(baseURL)
+          .set("Authorization", "invalid token")
+          .send(tempPosts[0]);
+        expect(res.body.message).toContain("JsonWebTokenError");
         expect(res.status).toBe(401);
       });
 
@@ -124,8 +133,19 @@ describe("Blogs Testing", () => {
         const res = await request(server)
           .post(baseURL)
           .set("Authorization", authToken)
-          .send(tempPosts[0]);
+          .send({
+            ...tempPosts[0],
+            title: "This is our testing blog post title 0",
+          });
         expect(res.status).toBe(201);
+      });
+
+      it("should return 400 if blog with same title already created", async () => {
+        const res = await request(server)
+          .post(baseURL)
+          .set("Authorization", authToken)
+          .send(tempPosts[0]);
+        expect(res.status).toBe(400);
       });
     });
 
@@ -154,6 +174,14 @@ describe("Blogs Testing", () => {
         expect(res.status).toBe(200);
         expect(res.body.content).toContain("updated");
       });
+      it("should return 422 if invalide blog-id passed", async () => {
+        const res = await request(server)
+          .put(`${baseURL}/invalide Blog ID`)
+          .set("Authorization", authToken)
+          .send({ content: "updated content" });
+        expect(res.status).toBe(422);
+        expect(res.body.message).toContain("Invalid Blog ID!");
+      });
     });
 
     describe("Deleting", () => {
@@ -181,6 +209,30 @@ describe("Blogs Testing", () => {
           )
           .set("Authorization", authToken);
         expect(res.status).toBe(200);
+      });
+
+      it("should return 401 if the token provided to delete is for removed user", async () => {
+        await User.deleteMany({});
+        const postCreated = await Blog.findOne().exec();
+        const res = await request(server)
+          .delete(
+            `${baseURL}/${(postCreated?._id as Types.ObjectId).toString()}`
+          )
+          .set("Authorization", authToken);
+        expect(res.status).toBe(401);
+        expect(res.body.message).toContain("user not found!");
+      });
+
+      it("should return 401 with authorization error if another user attempt to delete a blog he doesn't own", async () => {
+        ({ authToken } = await createUser(tempUser));
+        const postCreated = await Blog.findOne().exec();
+        const res = await request(server)
+          .delete(
+            `${baseURL}/${(postCreated?._id as Types.ObjectId).toString()}`
+          )
+          .set("Authorization", authToken);
+        expect(res.status).toBe(401);
+        expect(res.body.message).toContain("You are not authorized");
       });
     });
   });

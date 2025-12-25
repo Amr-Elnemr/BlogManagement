@@ -8,4 +8,5 @@ export default {
   transform: {
     ...tsJestTransformCfg,
   },
+  coveragePathIgnorePatterns: ["/src/db.ts", "src/config.ts"],
 };

@@ -59,9 +59,7 @@ export const updateBlog = async (
 
   //Update only provided values
   for (const key in blogData) {
-    if (blogData[key as keyof IBlog]) {
-      blogDocument.set(key, blogData[key as keyof IBlog]);
-    }
+    blogDocument.set(key, blogData[key as keyof IBlog]);
   }
 
   const updatedBlog = await blogDocument.save();
