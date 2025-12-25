@@ -7,7 +7,7 @@ import CustomError from "../helpers/CustomError";
 export interface IUser {
   email: string;
   password: string;
-  name?: string;
+  name: string;
 }
 interface IUserMethods {
   checkPassword(plainPassword: string): Promise<boolean>;
@@ -30,6 +30,8 @@ export const UserSchema = new Schema<
       type: String,
       required: true,
       unique: true,
+      lowercase: true,
+      trim: true,
     },
     password: {
       type: String,
@@ -63,9 +65,9 @@ UserSchema.methods.checkPassword = async function (plainPassword: string) {
   return bcrypt.compare(plainPassword, currentDocument.password);
 };
 
-UserSchema.methods.generateToken = async function () {
+UserSchema.methods.generateToken = function () {
   const currentDocument = this;
-  return signJWT({ id: currentDocument.id }, jwtSecret, { expiresIn: "1hr" });
+  return signJWT({ id: currentDocument.id }, jwtSecret, { expiresIn: "1h" });
 };
 
 //ensure hashed password before saving

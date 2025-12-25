@@ -28,6 +28,9 @@ Enhancements:
   ☐ Deployment
   ✔ More test coverage @done(25-12-25 14:47)
   ☐ Improve relative paths
-  ☐ Separate logic inside models
-  ☐ Review middlewares vs validators
+  ✘ Separate logic inside models @cancelled(25-12-25 16:42)
+  ✔ Review middlewares vs validators @done(25-12-25 16:44)
   ✔ revisit types (remove anys) @done(25-12-25 14:48)
+
+  ToTry:
+    ☐ Check swagger auto-generation

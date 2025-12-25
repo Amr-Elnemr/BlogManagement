@@ -1,5 +1,6 @@
 import { type Request, type Response, type NextFunction } from "express";
 import Blog from "../model/blog.model";
+import CustomError from "../helpers/CustomError";
 
 export default async (req: Request, res: Response, next: NextFunction) => {
   //query
@@ -9,9 +10,10 @@ export default async (req: Request, res: Response, next: NextFunction) => {
 
   //Check existance
   if (!targetBlog) {
-    return res
-      .status(404)
-      .send(`Error: Blog with id: ${req.params.id} not found!`);
+    throw new CustomError(
+      `Error: Blog with id: ${req.params.id} not found!`,
+      404
+    );
   }
   req.blog = targetBlog;
   next();
