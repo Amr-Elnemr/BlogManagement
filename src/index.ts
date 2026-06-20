@@ -13,11 +13,21 @@ app.use(express.json()); //for body parser to json
 app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
 
+// --- health check route ---
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok", uptime: process.uptime() });
+});
+
 // Swagger UI route
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 //use routers
 app.use("/v1/api", routes);
+
+// --- 404 handler ---
+app.use((req, res) => {
+  res.status(404).json({ error: "Not Found" });
+});
 
 //Error handler middleware
 app.use(error);
